@@ -10,7 +10,6 @@ on:
 
 env:
   NODE_VERSION: 16
-  NODE_OPTIONS: --max_old_space_size=6144
 
 jobs:
   deploy_dev:
@@ -65,7 +64,6 @@ jobs:
           ref: master
 
       - name: Set up Node ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: yarn
@@ -81,7 +79,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to Netlify
-        id: deploy
         uses: netlify/actions/cli@master
         with:
           args: deploy --dir=cast/dist --prod
